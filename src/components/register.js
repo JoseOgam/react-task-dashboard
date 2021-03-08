@@ -2,9 +2,24 @@ import { Component } from "react";
 
 class Register extends Component {
     state = {
-        username: "",
+        email: "",
         password: ""
     }
+    handleEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    handlePassword = (e) => {
+        this.setState({
+            password: e.target.value
+        })
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        
+     }
+    
     render() {
         return (
             
@@ -15,18 +30,19 @@ class Register extends Component {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Sign In</h5>
-            <form>
+            <form onSubmit={this.handleSubmit}>
              
-            <div className="form-group">
-                <label htmlFor="exampleInputUsername">Username</label>
-                <input
-                type="text"
-                className="form-control"
-                id="exampleInputUsername"
-                aria-describedby="usernameHelp"
-                placeholder="Enter Username"
-                />
-                                        </div>
+           <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Email address</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                        placeholder="Enter email"
+                        onChange={this.handleEmail}
+                      />
+                    </div>
                                          <div className="form-group">
                       <label htmlFor="exampleInputPassword1">Password</label>
                       <input
@@ -34,6 +50,7 @@ class Register extends Component {
                         className="form-control"
                         id="exampleInputPassword1"
                         placeholder="Password"
+                        onChange={this.handlePassword}
                       />
                     </div>
             
