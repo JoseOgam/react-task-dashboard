@@ -1,10 +1,25 @@
 import { Component } from "react";
 
 class Login extends Component {
+  state = {
+    email: "",
+    password: ""
+  }
+  handleEmail = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+  handlePassword = (e) => {
+    this.setState({
+      password: e.target.value
+    })
+   }
+  
     render() {
         return (
             
-            <div className="login">
+        <div className="login">
         <div className="container">
           <div className="row">
             <div className="col-6 offset-3">
@@ -22,7 +37,8 @@ class Login extends Component {
                         className="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                            placeholder="Enter email"
+                            onChange={this.handleEmail}
                       />
                     </div>
                     <div className="form-group">
@@ -31,7 +47,8 @@ class Login extends Component {
                         type="password"
                         className="form-control"
                         id="exampleInputPassword1"
-                        placeholder="Password"
+                            placeholder="Password"
+                            onChange={this.handlePassword}
                       />
                     </div>
                     <button type="submit" className="btn btn-success">
