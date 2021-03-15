@@ -14,7 +14,12 @@ class Login extends Component {
     this.setState({
       password: e.target.value
     })
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    
    }
+  
   
     render() {
         return (
@@ -29,7 +34,7 @@ class Login extends Component {
                   <h6 className="card-subtitle mb-2 text-muted">
                     Please sign in to continue.
                   </h6>
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="exampleInputEmail1">Email address</label>
                       <input
