@@ -1,18 +1,54 @@
-import { Route, Switch } from 'react-router'
-import Home from './components/home/Home';
-import Login from './components/login'
-import Register from './components/register'
-import './styles/App.scss'
-function App() {
-  return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={ Login } />
-        <Route path="/register" component={Register} />
-     </Switch>
-    </div>
-  );
+import React, { Component } from 'react';
+import { Router, Route } from 'react-router-dom';
+
+import {Login} from './components/auth/Login';
+import { Register } from './components/auth/Register';
+import {Home} from './components/Home/Home';
+
+import { history } from './helpers';
+import { PrivateRoute } from './components/PrivateRoute'
+import { connect } from 'react-redux';
+import { alertActions } from './actions';
+import './App.css';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    history.listen((location, action) => {
+        // clear alert on location change
+        this.props.clearAlerts();
+    });
+  }
+
+  render() {
+    const { alert } = this.props;
+    return (
+      <div>
+         {alert.message &&
+            <div className={`alert ${alert.type}`}>{alert.message}</div>
+          }
+        <Router history={history}>
+            <div>
+            <PrivateRoute exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+function mapState(state) {
+  const { alert } = state;
+  return { alert };
+}
+
+const actionCreators = {
+  clearAlerts: alertActions.clear
+};
+
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
+// export default App;

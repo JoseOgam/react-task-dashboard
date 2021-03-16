@@ -1,5 +1,5 @@
-import { userService } from '../services/userServices';
-import { appConstants,history } from '../helpers/index';
+import { userService } from '../services';
+import { appConstants,history } from '../helpers';
 
 import { alertActions } from './';
 
@@ -62,7 +62,7 @@ function register(user) {
         userService.register(user)
             .then(
                 user => { 
-                    dispatch(success(user));
+                    dispatch(success());
                     // history.push('/login');
                     dispatch(alertActions.success('Registration successful. Login to Continue!'));
                 },
